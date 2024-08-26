@@ -1,5 +1,6 @@
 ### SETTINGS ###
 *.json
+*.env
 
 ### GRADLE ###
 .gradle/
