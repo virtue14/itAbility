@@ -10,8 +10,8 @@
 
 <script setup>
 
-  import Header from "@/components/Header.vue";
-  import Footer from "@/components/Footer.vue";
+  import Header from "itAbility-FE/src/components/Header.vue";
+  import Footer from "itAbility-FE/src/components/Footer.vue";
   import {RouterLink, RouterView} from "vue-router";
 
 </script>

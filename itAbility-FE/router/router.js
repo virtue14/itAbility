@@ -1,14 +1,14 @@
 import {createRouter, createWebHistory} from 'vue-router';
 
-import Login from "@/components/login/Login.vue";
-import FeedDetail from '@/components/Feed/FeedDetail.vue';
-import MyPageMain from "@/components/mypage/MyPageMain.vue";
-import FeedList from "@/components/Feed/FeedList.vue";
-import FeedCreate from "@/components/Feed/FeedCreate.vue";
-import RecruitPage from "@/components/recruit/RecruitPage.vue";
-import Jobs from "@/components/jobs/jobs.vue";
-import RecruitDetailPage from '@/components/recruit/RecruitDetailPage.vue';
-import RecruitRegistPage from '@/components/recruit/RecruitRegistPage.vue';
+import Login from "itAbility-FE/src/components/login/Login.vue";
+import FeedDetail from 'itAbility-FE/src/components/Feed/FeedDetail.vue';
+import MyPageMain from "itAbility-FE/src/components/mypage/MyPageMain.vue";
+import FeedList from "itAbility-FE/src/components/Feed/FeedList.vue";
+import FeedCreate from "itAbility-FE/src/components/Feed/FeedCreate.vue";
+import RecruitPage from "itAbility-FE/src/components/recruit/RecruitPage.vue";
+import Jobs from "itAbility-FE/src/components/jobs/jobs.vue";
+import RecruitDetailPage from 'itAbility-FE/src/components/recruit/RecruitDetailPage.vue';
+import RecruitRegistPage from 'itAbility-FE/src/components/recruit/RecruitRegistPage.vue';
 
 const routes = [
     {path: '/login', component: Login},
@@ -38,7 +38,7 @@ const routes = [
         path: '/',
         component: FeedList
     },
-    
+
     {
         path: '/recruit',
         component: RecruitPage

@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import App from '@/App.vue'
+import App from 'itAbility-FE/src/App.vue'
 import router from "../router/router.js";
 
 const app = createApp(App)
