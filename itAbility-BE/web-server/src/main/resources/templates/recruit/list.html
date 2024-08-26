@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Document</title>
+</head>
+<body>
+<div id="app">
+    <div class="recruit-card" v-for="recruit in recruits" :key="recruit.recruitId">
+        <template v-if="recruit.completeState">
+            <div>
+                모집완료
+            </div>
+        </template>
+
+        <template v-else>
+            <div>
+                모집중
+            </div>
+            <div>
+                {{recruit.diff}}
+            </div>
+        </template>
+
+<!--        <p>{{recruit.recruitId}}</p>-->
+        <p>{{recruit.recruitTitle}}</p>
+        <p>{{recruit.recruitExpDate}}</p>
+        <p>{{recruit.recruitMbCnt}}</p>
+    </div>
+</div>
+
+<script>
+    const {createApp, reactive, onMounted, toRefs} = Vue;
+
+    const useRecruits = () => {
+        const state = reactive({
+            completeState: false,
+            recruits: [],
+            currentMbCnt: 0
+        })
+
+        const fetchRecruits = async() => {
+            const response = await fetch("http://localhost:8000/board-service/recruit/list");
+            const data = await response.json();
+
+            state.recruits = data;
+
+            for (const recruit of state.recruits) {
+                recruit.completeState = false;
+                fetchRecruitInfos(recruit.recruitId).then( count => {
+                        recruit.currentMbCnt = count;
+                    }
+                );
+            }
+        }
+
+        const fetchRecruitInfos = async(id) => {
+            const response = await fetch("http://localhost:8000/board-service/member_recruits/list/" + id);
+            const data = await response.json();
+
+            return data.length;
+        }
+
+        const calcExpDate = async() => {
+            const currentDate = new Date();
+
+            for (const recruit of state.recruits) {
+                var endDate = new Date(recruit.recruitExpDate);
+                console.log(recruit.currentMbCnt <recruit.recruitMbCnt);
+                console.log(typeof recruit.currentMbCnt);
+
+                if(currentDate < endDate && recruit.currentMbCnt < recruit.recruitMbCnt) {
+                    recruit.diff = Math.trunc((endDate - currentDate) / (1000 * 60 * 60 * 24));
+                }
+                else {
+                    recruit.completeState = true;
+                }
+            }
+        }
+
+        onMounted(async () => {
+            await fetchRecruits();
+            await fetchRecruitInfos();
+            await calcExpDate();
+        })
+
+        return {...toRefs(state), calcExpDate}
+    }
+
+    createApp({
+        setup() {
+            const {recruits, recruitInfos, calcExpDate} = useRecruits();
+
+            return {
+                recruits, recruitInfos, calcExpDate
+            }
+        }
+    }).mount('#app');
+</script>
+</body>
+</html>
