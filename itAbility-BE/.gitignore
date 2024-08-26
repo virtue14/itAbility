@@ -1,11 +1,9 @@
-### 직접설정 ###
-.idea/
-application.yml
+### SETTINGS ###
+*.json
 
-HELP.md
-.gradle
+### GRADLE ###
+.gradle/
 build/
-!gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
 
@@ -39,6 +37,3 @@ out/
 
 ### VS Code ###
 .vscode/
-
-*.yml
-*.json
