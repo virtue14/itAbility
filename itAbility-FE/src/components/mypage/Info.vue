@@ -6,16 +6,16 @@
      <div style="padding: 0 5%; padding-top: 10px; ">
 
       <div class="careerInfo" v-for="(career, index) in member.careers" :key="index">
-        회사명: &nbsp;&nbsp;&nbsp;&nbsp;{{ career.companyName }} 
+        회사명: &nbsp;&nbsp;&nbsp;&nbsp;{{ career.companyName }}
         <!-- <button @click="editCareer(index)" style="float:right">수정</button> -->
         <button @click="deleteCareer(career.careerId)" style="float:right">삭제</button>
-        <br> 
-        직급: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ career.role }} <br> 
-        직무: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ career.assignedTask }} <br> 
+        <br>
+        직급: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ career.role }} <br>
+        직무: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ career.assignedTask }} <br>
         업무일:&nbsp;&nbsp;&nbsp; &nbsp;{{ career.startDate }} ~ {{ career.endDate }}
       </div>
-    </div>        
-    
+    </div>
+
     <div class="popup-overlay" v-if="CareerPopUp">
         <div class="popup-content" >
             <span class="close" @click="OffCareerPopUp">&times;</span>
@@ -25,7 +25,7 @@
                 회사명 <input type="text" v-model="companyName">
                 직급 <input type="text" v-model="role">
                 직무 <input type="text" v-model="assignedTask">
-                업무일 <input type="date" v-model="startDate"> ~ <input type="date" v-model="endDate"> 
+                업무일 <input type="date" v-model="startDate"> ~ <input type="date" v-model="endDate">
                 <!-- 재직여부 <input type="checkbox" v-model="isEmployed"><br> -->
                 <button type="submit">추가</button>
             </form>
@@ -33,7 +33,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="popup-overlay" v-if="SkillPopUp">
         <div class="popup-content" >
             <span class="close" @click="OffSkillPopUp">&times;</span>
@@ -88,7 +88,7 @@
 
     <hr><br>
 
-    <div class="skill">기술스택 
+    <div class="skill">기술스택
         <button @click="OnSkillPopUp">편집</button>
     </div>
     <ul>
@@ -106,9 +106,8 @@
 
 
 
-  
+
   <script setup>
-    import { defineProps, vModelCheckbox } from 'vue';
     import {ref} from 'vue';
     const companyName= ref(null);
     const role = ref(null);
@@ -189,7 +188,7 @@
     const formData = {
         careerId : careerId
     };
-    
+
     fetch(`http://localhost:8000/member-service/rest/mypage/6249388071526484416/career`, {
         method: 'DELETE',
         headers: {
@@ -214,7 +213,7 @@
         console.error('Error:', error);
     });
 };
-  
+
   const skills = ref([]);
 
   const GetAllSkill = async()=>{
@@ -238,14 +237,14 @@
         const index = skills.value.findIndex(s => s.id == skill.id);
         SkillForRequest.value.push(skill);
         console.log(SkillForRequest.value);
-        skills.value.splice(index, 1);   
-    
+        skills.value.splice(index, 1);
+
     }
     const eraseSkill = (skill)=> {
       const index = skills.value.findIndex(s => s.id == skill.id);
         skills.value.push(skill);
         console.log(skills.value);
-        SkillForRequest.value.splice(index, 1);   
+        SkillForRequest.value.splice(index, 1);
     }
 
     const saveSkill = async() => {
@@ -279,7 +278,7 @@
         });
     };
 
-    
+
 
     const GetAllRecCate = async()=>{
         await fetch(`http://localhost:8000/board-service/recruit/recruit-categories`).then(response => {
@@ -297,21 +296,21 @@
             console.error('There was a problem with the fetch operation:', error);
         });
     };
-    
+
     const addRecCate = (recCate)=> {
         const index = AllRecCate.value.findIndex(s => s.id == recCate.id);
         RecCateForRequest.value.push(recCate);
         console.log(RecCateForRequest.value);
-        AllRecCate.value.splice(index, 1);   
+        AllRecCate.value.splice(index, 1);
     }
     const eraseRecCate = (recCate)=> {
       const index = AllRecCate.value.findIndex(s => s.id == recCate.id);
         AllRecCate.value.push(recCate);
         console.log(AllRecCate.value);
-        RecCateForRequest.value.splice(index, 1);   
+        RecCateForRequest.value.splice(index, 1);
     }
 
-    
+
     const saveRecCate = async() => {
 
         console.log(RecCateForRequest.value);
@@ -333,11 +332,11 @@
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-            
+
         })
         .then(data => {
             console.log('Response:', data);
-            
+
         })
         .catch(error => {
             console.error('Error:', error);
@@ -346,7 +345,7 @@
 
 
 </script>
-  
+
 <style scoped>
     .Info {
       align-items: center;
@@ -357,7 +356,7 @@
       font-weight: 600;
       padding-top: 30px;
     }
-  
+
     hr {
       width: 99%;
       height: 1px;
@@ -412,9 +411,9 @@
         align-items: center;
         border-radius: 8px;
         display: flex;
-        
-        margin: 2px; 
-    }  
+
+        margin: 2px;
+    }
     .recruitBox{
         background-color: #515151;
         width: 150px;
@@ -430,9 +429,9 @@
         align-items: center;
         border-radius: 8px;
         display: flex;
-        
-        margin: 2px; 
-    }  
+
+        margin: 2px;
+    }
     button {
         padding: 10px 20px;
         background-color: #4CAF50;
@@ -509,8 +508,7 @@
         right: 10px;
         font-size: 24px;
         cursor: pointer;
-    
+
     }
 
   </style>
-  

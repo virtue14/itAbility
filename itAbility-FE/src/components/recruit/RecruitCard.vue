@@ -1,5 +1,5 @@
 <script setup>
-    import { defineProps, reactive, onMounted } from "vue";
+    import { reactive, onMounted } from "vue";
     import { useRouter } from "vue-router";
 
     const router = useRouter();
@@ -7,11 +7,11 @@
     const props = defineProps({
         recruit: Object
     })
-    
+
     const state = reactive({
         skillList: []
     })
-    
+
     const recruitDetail = (recruitId) => {
         // router.push({path: "/recruit/detail", query: props.recruit});
         router.push(`/recruit/${recruitId}`);
@@ -50,7 +50,7 @@
     onMounted(async() => {
         // await fetchSkillList();
     });
-    
+
 </script>
 
 <template>
@@ -77,14 +77,14 @@
         <div class="member-cnt">{{ recruit.currentMbCnt }} / {{ recruit.recruitMbCnt}}</div>
 
         <div class="category-area">
-            <div>모집군</div> 
+            <div>모집군</div>
             <div v-for="category in recruit.categoryList" class="category-skill">{{ category.recruitCategoryName }}</div>
         </div>
         <!-- <div class="category-area">
             <div>기술스택</div>
             <div v-for="skill in state.skillList" class="category-skill">{{ skill.skillName }}</div>
         </div> -->
-        
+
         <div class="member">
 
         </div>
@@ -207,7 +207,7 @@
             flex-wrap: wrap;
             white-space: initial;
         }
-    }   
+    }
 
     .category-skill {
         color: white;

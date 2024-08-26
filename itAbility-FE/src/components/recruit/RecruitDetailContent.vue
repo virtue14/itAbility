@@ -1,5 +1,5 @@
 <template>
-    <div class="title-area"> 
+    <div class="title-area">
         <div class="state">모집중</div>
         <div class="title">{{ props.recruit.recruitTitle }}</div>
     </div>
@@ -9,7 +9,7 @@
         <div class="content-title">모집기한</div>
         <div class="content-line">{{ props.recruit.recruitExpDate }}까지</div>
       </div>
-      <div class="content-area"> 
+      <div class="content-area">
         <div class="content-title">모집인원</div>
         <div class="content-line">{{ props.recruit.recruitMbCnt }}</div>
       </div>
@@ -23,7 +23,6 @@
 </template>
 
 <script setup>
-  import { defineProps } from "vue";
   import axios from "axios";
 
   const applyRecruit = async () => {
@@ -49,7 +48,7 @@
     axios.post('http://localhost:8000/board-service/member_recruits/regist', postData)
       .then(response => {
           alert('신청 완료');
-          
+
         console.log(response.data);
         const useRouter = useRouter();
         useRouter.push(response.data);
@@ -57,7 +56,7 @@
       .catch(error => {
           console.error('오류 발생', error);
       });
-  
+
   };
 
 const props = defineProps({
